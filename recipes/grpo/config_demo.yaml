@@ -1,0 +1,50 @@
+# Model arguments
+model_name_or_path: Qwen/Qwen2.5-1.5B-Instruct
+load_in_4bit: true
+fast_inference: true
+max_seq_length: 2048
+gpu_memory_utilization: 0.5
+
+# Peft arguments
+target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+lora_rank: 64
+use_gradient_checkpointing: "unsloth"
+lora_save_path: Qwen2.5-1.5B-GRPO-Lora
+
+# Dataset arguments
+dataset_name_or_path: AI-MO/NuminaMath-TIR
+
+# GRPO trainer config
+bf16: true
+use_vllm: true
+learning_rate: 2.0e-5
+adam_beta1: 0.9
+adam_beta2: 0.99
+warmup_ratio: 0.1
+max_grad_norm: 0.1
+weight_decay: 0.1
+lr_scheduler_type: "cosine"
+optim: "adamw_8bit"
+max_prompt_length: 512
+max_completion_length: 1024
+max_steps: 250  #-1
+num_generations: 2
+num_train_epochs: 1
+gradient_accumulation_steps: 4
+report_to: "none"
+per_device_eval_batch_size: 4
+per_device_train_batch_size: 4
+push_to_hub: false
+save_strategy: "no"
+log_level: "info"
+logging_steps: 5
+output_dir: "outputs"
+overwrite_output_dir: true
+# vllm_gpu_memory_utilization: 0.7
+# do_eval: true
+# eval_strategy: steps
+# eval_steps: 100
+
+
+
+
